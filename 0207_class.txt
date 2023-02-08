@@ -1,0 +1,122 @@
+라이브 강의
+선택정렬(selectionsort)
+'''
+7
+7 2 5 3 4 6 4
+'''
+N = int(input())
+arr = list(map(int,input().split()))
+for i in range(N-1):  # 작업 구간의 시작 인덱스
+    minIdx = i        # 맨 앞이 최소라고 가정
+    for j in range(i+1, N):
+        if arr[minIdx] > arr[j]:
+            minIdx = j
+    arr[minIdx], arr[i] = arr[i], arr[minIdx]
+print(arr)
+
+====================================================================
+
+반 강의
+binary Search
+정렬된 데이터에서 원하는 값을 빠르게 찾기 위한 탐색 방법
+arr = [1,3,5,6,8,11,13,15]
+target = int(input())
+def binary_search(st,ed,target):
+    while 1:
+        mid = (st+ed)//2
+        if arr[mid] == target:
+            return 1
+        elif arr[mid] > target:
+            ed = mid - 1
+        elif arr[mid] < target:
+            st = mid + 1
+        if ed < st:
+            return 0
+answer = binary_search(0,len(arr)-1,target)
+if answer:
+    print('찾았음')
+else:
+    print('없음')
+
+lst = list(map(int,input().split()))
+target = int(input())
+for i in range(0,len(lst)-1):        # 선택정렬
+    for j in range(1,len(lst)):
+        if lst[i] > lst[j]:
+            lst[i],lst[j] = lst[j],lst[i]
+
+def search_binary(st,ed,target):
+    while 1:
+        mid = (st+ed) // 2
+        if lst[mid] == target:
+            return 1
+        elif lst[mid] > target:
+            ed = mid - 1
+        elif lst[mid] < target:
+            st = mid + 1
+        if st > ed:
+            return 0
+answer = search_binary(0,len(lst)-1,target)
+if answer:
+    print('찾았음')
+else:
+    print('없음')
+
+====================================================================
+
+parametric search
+배터리가 몇% 충전 되어 있는지 0(n)보다 빠르게 검색
+battery = ['*','*','*','*','*','*','_','_','_','_']
+#battery = '******____'
+def parametric_search(st,ed):
+    maxvalue = -1
+    while 1:
+        mid = (st+ed) // 2
+        if battery[mid] == '*':
+            maxvalue = mid
+            st = mid + 1
+        elif battery[mid] == '_':
+            ed = mid - 1
+        if st > ed:
+            break
+    return maxvalue + 1
+answer = parametric_search(0,len(battery)-1)
+print(f'{answer}0%')
+
+커서의 위치를 알려주는 프로그램
+6*10 size 리스트
+curser=[
+ '##########',
+ '##########',
+ '###_______',
+ '__________',
+ '__________',
+ '__________',
+]
+def curser_search1(st,ed):
+    maxi = 0
+    while 1:
+        mid = (st+ed) // 2
+        if curser[mid][0] == '#':
+            maxi = mid
+            st = mid + 1
+        elif curser[mid][0] == '_':
+            ed = mid - 1
+        if st > ed:
+            break
+        return maxi
+def curser_search2(st,ed,yy):
+    maxj = 0
+    while 1:
+        mid = (st+ed) // 2
+        if curser[yy][mid] == '#':
+            maxj = mid
+            st = mid + 1
+        elif curser[yy][mid] == '_':
+            ed = mid - 1
+        if st > ed:
+            break
+        return maxj
+answer1 = curser_search1(0,5)
+answer2 = curser_search2(0,9,answer1-1)
+print(answer1,answer2)
