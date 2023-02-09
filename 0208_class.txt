@@ -1,0 +1,154 @@
+반 강의
+재귀함수
+# 주사위 n개 경우의 수
+n = int(input())
+
+def abc(level,path):
+    if level == n:
+        print(path)
+        return
+    for i in range(1,7):
+        abc(level+1, path+str(i))
+abc(0,'')
+
+def abc(level):
+    if level == 2:
+        return
+
+    abc(level+1)
+    dummy = 1
+abc(0)
+
+0 1 2 3 4 5 4 3 2 1 출력
+def abc(level):
+    print(level)
+    if level == 5:
+        return
+    abc(level+1)
+    print(level)
+abc(0)
+
+7 6 5 4 3 2 2 3 4 5 6 7 출력
+def abc(level):
+    print(level,end=' ')
+    if level == 2:
+        print(level,end=' ')
+        return
+    abc(level-1)
+    print(level,end=' ')
+abc(7)
+
+# 함수를 3번 호출하면서 입력받은 수에 2씩 더함
+1 입력시 7 5 3 1
+2 입력시 8 6 4 2
+3 입력시 9 7 5 3
+n = int(input())
+def abc(level,value):
+    if level == 3:
+        print(value)
+        return
+    abc(level+1,value+2)
+    print(value)
+abc(0,n)
+
+# 누적합 출력
+1. 전역변수 사용
+arr = [3,4,5,1,6,9]
+sum = arr[0]
+def getsum(index):
+    global sum
+    print(sum)
+    if index == 5:
+        return
+    sum += arr[index+1]
+    getsum(index+1)
+
+getsum(0)
+
+2. 지역변수 사용
+arr = [3,4,5,1,6,9]
+def getsum(index,sum):
+    print(sum,end=' ')
+    if index == 5:
+        return
+    getsum(index+1, sum+arr[index+1])
+getsum(0,arr[0])
+
+# 28 19 13 12 7 3 출력하기(누적합)
+1. 전역변수(global)
+arr = [3,4,5,1,6,9]
+sum = arr[0]
+def abc(level):
+    global sum
+    if level == 5:
+        print(sum,end=' ')
+        return
+    sum += arr[level+1]
+    abc(level+1)
+    sum -= arr[level+1]
+    print(sum,end=' ')
+abc(0)
+
+2. 지역변수(매개변수)
+arr = [3,4,5,1,6,9]
+def ac(level,sum):
+    if level == 5:
+        print(sum,end=' ')
+        return
+    abc(level+1, sum+arr[level+1])
+    print(sum,end=' ')
+
+abc(0,arr[0])
+
+def abc(level):
+    if level == 2:
+        return
+    for i in range(2):
+        abc(level+1)
+    dummy = 1
+abc(0)
+
+# '#' 몇 개인지 출력
+1. 12개
+def abc(level):
+    if level == 2:
+        return
+
+    for i in range(2):
+        print('#',end=' ')
+        abc(level+1)
+        print('#',end=' ')
+abc(0)
+
+2. 13개
+def abc(level):
+    print('#',end=' ')
+    if level == 2:
+        return
+
+    for i in range(2):
+        abc(level+1)
+        print('#',end=' ')
+abc(0)
+
+3. 7개
+def abc(level):
+    if level == 2:
+        print('#',end=' ')
+        return
+
+    print('#',end=' ')
+    for i in range(2):
+        abc(level+1)
+abc(0)
+
+4. 011101110
+def abc(level):
+    if level == 2:
+        return
+
+    for i in range(2):
+        print(level,end=' ')
+        abc(level+1)
+    print(level,end=' ')
+abc(0)
