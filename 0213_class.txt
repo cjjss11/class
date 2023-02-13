@@ -1,0 +1,258 @@
+# 반 강의
+
+# 입력 받은 주사위 경우의 수 (중복순열)
+n = int(input())
+path = [0]*6
+def abc(level):
+    if level == n:
+        for i in range(n):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(6):
+        path[level] = i + 1
+        abc(level+1)
+abc(0)
+# ----------------------------------------------------------------------
+# 순열 (나왔던 숫자는 다시 나오지 않음)
+n = 3
+dice = [1,2,3,4]
+used = [0]*4
+path = [0]*n
+def abc(level):
+    if level == n:
+        for i in range(n):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        if used[i] == 1:
+            continue
+        path[level] = dice[i]
+        used[i] = 1 # 해당 가지를 탔으면 1로 체크
+        abc(level+1)
+        used[i] = 0
+abc(0)
+
+# 첫번째 주사위에서 2가 나오지 않는 경우
+# 1. 2에 진입하지 않고 출력
+dice = [1,2,3,4]
+n = 3
+path = [0]*4
+def abc(level):
+    if path[0] == 2:
+        return
+    if level == n:
+        for i in range(n):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        if level == 0 and dice[i] == 2:
+            continue
+        path[level] = dice[i]
+        abc(level+1)
+abc(0)
+
+# 2. 2에 진입 후 return
+dice = [1,2,3,4]
+n = 3
+path = [0]*4
+def abc(level):
+    if path[0] == 2:
+        return
+    if level == n:
+        for i in range(n):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        path[level] = dice[i]
+        abc(level+1)
+abc(0)
+
+# ABCD가 적혀있는 카드 3개의 묶음이 있다.
+# 각 묶음에서 카드를 1장씩 뽑았을 때
+# C로 시작하는 경우는 다 제외
+arr = ['A','B','C','D']
+path = ['']*4
+def abc(level):
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        if level == 0 and arr[i] == 'C':
+            continue
+        path[level] = arr[i]
+        abc(level+1)
+abc(0)
+
+# 모든 경우에서 B가 나오는 경우는 제외
+# 1. B에 진입하지 않고 출력
+arr = ['A','B','C','D']
+path = ['']*4
+def abc(level):
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        # if i == 1:
+        if arr[i] == 'B':
+            continue
+        path[level] = arr[i]
+        abc(level+1)
+abc(0)
+
+# 2. B에 진입한 후 return
+arr = ['A','B','C','D']
+path = ['']*4
+def abc(level):
+    if 'B' in path:
+        return
+    # path배열에 적고 들어오기 때문에 해당 level 전의 path배열을 확인
+    # if level > 0 and path[level-1] == 'B':
+    #     return
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        path[level] = arr[i]
+        abc(level+1)
+abc(0)
+
+# 연속해서 같은 카드를 뽑으면 안됨
+# 1. 진입하지 않고 출력
+arr = ['A','B','C','D']
+path = ['']*4
+def abc(level):
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        if level > 0 and (path[level-1] == arr[i]):
+            continue
+        path[level] = arr[i]
+        abc(level+1)
+abc(0)
+
+# 2. 진입하고 난 후 return
+arr = ['A','B','C','D']
+path = ['']*4
+def abc(level):
+    if level > 1 and path[level-1] == path[level-2]:
+        return
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        path[level] = arr[i]
+        abc(level+1)
+abc(0)
+# ----------------------------------------------------------------------
+# 조합
+# 1. path 배열을 활용하여 조합 구현
+arr = ['A','B','C','D']
+path = ['']*4
+def abc(level):
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(4):
+        if level > 0 and path[level-1] >= arr[i]:
+            continue
+        path[level] = arr[i]
+        abc(level+1)
+abc(0)
+
+# 2. path 배열을 사용하지 않고 i를 사용하여 조합 구현
+arr = ['A','B','C','D']
+path = ['']*4
+def abc(level,start):
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        return
+    for i in range(start,4):
+        path[level] = arr[i]
+        abc(level+1,i+1)
+abc(0,0) # level start(for문 시작점)
+# ----------------------------------------------------------------------
+# graph
+people = ['A','B','D','C','E','F']
+1. 인접 행렬(2차원 배열)
+arr = [[0,1,0,1,0,0],
+       [0,0,1,0,0,0],
+       [0,0,0,0,0,0],
+       [0,0,0,0,1,1],
+       [0,0,0,0,0,0],
+       [0,0,0,0,0,0]]
+
+# 2. 인접 리스트
+lst = [[] for _ in range(6)]
+lst[0].append(people[1]) # 0번 인덱스에서 'B'로 갈 수 있음
+lst[0].append(people[3]) # 0번 인덱스에서 'C'로 갈 수 있음
+lst[1].append(people[2]) # 1번 인덱스에서 'D'로 갈 수 있음
+lst[3].append(people[4]) # 3번 인덱스에서 'E'로 갈 수 있음
+lst[3].append(people[5]) # 3번 인덱스에서 'F'로 갈 수 있음
+
+# 3. 리스트 (1차원 배열 - 이진트리) -> 어렵고 싸피에서는 잘 사용하지 않음
+lst = ['_','A','B','C','D','_','D','F']
+
+# 가장 인기가 많은 사람 출력
+people = ['Amy','Bob','Chloe','Diane','Edger']
+arr = [[0,0,1,0,1],
+       [1,0,0,0,0],
+       [0,1,0,0,0],
+       [0,1,0,0,0],
+       [0,0,0,1,0]]
+
+maxvalue = 0
+for j in range(5):
+    sum = 0
+    for i in range(5):
+        if arr[i][j] == 1:
+            sum += 1
+        if sum > maxvalue:
+            maxvalue = sum
+            popular = people[j]
+print(popular)
+
+# 문자 하나를 입력받고 입력받은 문자의 형제노드를 출력
+# A 입력시 형제없음 출력, B 입력시 C 출력, E 입력시 D 출력, F 입력시 형제없음 출력
+people = ['A','B','C','D','E','F']
+st = input()
+index = 0
+index1 = 0
+arr = [[0,1,1,0,0,0],
+       [0,0,0,1,1,0],
+       [0,0,0,0,0,1],
+       [0,0,0,0,0,0],
+       [0,0,0,0,0,0],
+       [0,0,0,0,0,0]]
+for i in range(len(people)):
+    if people[i] == st:
+        index = i
+for i in range(6):
+    if arr[i][index] == 1:
+        index1 = i
+    elif arr[i][index] == 0:
+        print('형제없음')
+    if arr[index1][i] == 1:
+        if people[i] != st:
+            if arr[index1][i] == 1:
+                print(people[i])
+            elif arr[index1][i] == 0:
+                print('형제없음')
