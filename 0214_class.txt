@@ -1,0 +1,235 @@
+#반 강의
+
+#DFS는 한번씩만 탐색
+
+#TREE DFS 탐색 순서 출력하기
+name = list(input().split())
+arr = [[0,1,1,0,0,0],
+       [0,0,0,1,1,0],
+       [0,0,0,0,0,1],
+       [0,0,0,0,0,0],
+       [0,0,0,0,0,0],
+       [0,0,0,0,0,0]]
+answer = []
+def dfs(now):
+    global answer
+    answer.append(name[now])
+
+    for i in range(6):
+        if arr[now][i] == 1:
+            dfs(i)
+dfs(0)  # 0번 인덱스 즉 A부터 dfs로 탐색
+print(*answer)
+
+
+# K에서부터 DFS 탐색하면서 탐색되는 순서를 출력
+name = list(input().split())
+answer = []
+arr = [[0,1,1,1,0,0,0],
+       [0,0,0,0,1,1,0],
+       [0,0,0,0,0,0,1],
+       [0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0]]
+def dfs(now):
+    global answer
+    answer.append(name[now])
+    for i in range(7):
+        if arr[now][i] == 1:
+            dfs(i)
+dfs(0)
+print(*answer)
+
+-------------------------------------------------------------------------------------------------
+
+# TREE 모양이 아닌 CYCLE이 발생할 수 있는 그래프 모양 DFS 한번씩 탐색 순서 출력
+name = list(input().split()) # B A C D
+used = [0]*len(name)
+answer = []
+arr = [[0,0,1,1],
+       [1,0,0,0],
+       [0,1,0,1],
+       [0,0,0,0]]
+def dfs(now):
+    answer.append(name[now])
+    for i in range(4):
+        if arr[now][i] == 1: # 인접행렬 탐색하다가 1이 체크 되어 있으면
+            if used[i] == 0: # 한번도 방문한 적이 없으면
+                used[i] = 1 # 방문 체크하고
+                dfs(i)      # 들어가기
+used[0] = 1 # 탐색 시작 인덱스에 1 체크하고 dfs 탐색
+dfs(0)
+print(*answer)
+
+-------------------------------------------------------------------------------------------------
+
+# A에서 D가지 갈 수 있는 경로 경우의 수 - 한번씩 탐색이 아닌 여러번 탐색
+name = list(input().split()) # B A C D
+used = [0]*len(name)
+answer = []
+count = 0
+arr = [[0,0,1,1],
+       [1,0,1,0],
+       [1,0,0,1],
+       [0,0,0,0]]
+def dfs(now):
+    global count
+    if now == 3:
+        count += 1
+    for i in range(4):
+        if arr[now][i] == 1:
+            if used[i] == 0:
+                used[i] = 1
+                dfs(i)
+                used[i] = 0
+used[1] = 1 # A에서 시작이므로 A부터 탐색 시작
+dfs(1)
+print(count)
+
+
+# A에서 어디를 거쳐서 D까지 도착했는지 모든 경로 출력
+name = list(input().split()) # B A C D
+used = [0]*len(name)
+arr = [[0,0,1,1],
+       [1,0,1,0],
+       [1,0,0,1],
+       [0,0,0,0]]
+path = []
+def dfs(now):
+    path.append(name[now])
+    if now == 3:
+        print(*path)
+        return
+    for i in range(4):
+        if arr[now][i] == 1:
+            if used[i] == 0:
+                used[i] = 1
+                dfs(i)
+                used[i] = 0
+                path.pop()
+used[1] = 1
+dfs(1)
+
+
+-------------------------------------------------------------------------------------------------
+
+# A에서 D까지 가는데 최소비용 구하기
+# 1. 매개변수 사용
+name = list(input().split())
+arr = [[0,0,3,14],
+       [7,0,19,0],
+       [3,0,0,1],
+       [0,0,0,0]]
+
+used = [0]*4
+minvalue = 21e8
+def dfs(now,sum):
+    global minvalue
+    if now == 3:
+        if minvalue > sum:
+            minvalue = sum
+        return
+    for i in range(4):
+        if arr[now][i] > 0:
+            if used[i] == 0:
+                used[i] = 1
+                dfs(i,sum+arr[now][i])
+                used[i] = 0
+
+used[1] = 1
+dfs(1,0)
+print(minvalue)
+
+
+# 2. 전역변수 사용
+name = list(input().split())
+arr = [[0,0,3,14],
+       [7,0,19,0],
+       [3,0,0,1],
+       [0,0,0,0]]
+
+used = [0]*4
+minvalue = 21e8
+sum = 0
+def dfs(now):
+    global minvalue,sum
+    if now == 3:
+        if minvalue > sum   :
+            minvalue = sum
+            return
+    for i in range(4):
+        if arr[now][i] > 0:
+            if used[i] == 0:
+                used[i] = 1
+                sum += arr[now][i]
+                dfs(i)
+                used[i] = 0
+                sum -= arr[now][i]
+used[1] = 1
+dfs(1)
+print(minvalue)
+
+
+--------------------------------------------------------------------------------------------------
+
+# 출발점을 입력받고 입력받은 출발점 알파벳부터 E가 써있는 곳까지 갈 수 있는 방법이 몇가지 있는지 출력
+st = input()
+lst = ['A','B','C','D','E']
+arr = [[0,1,0,0,0],
+       [0,0,1,1,1],
+       [1,0,0,1,0],
+       [0,0,0,0,1],
+       [0,0,0,0,0]]
+count = 0
+used = [0]*5
+def dfs(now):
+    global count
+    if now == 4:
+        count += 1
+        return
+    for i in range(5):
+        if arr[now][i] == 1:
+            if used[i] == 0:
+                used[i] = 1
+                dfs(i)
+                used[i] = 0
+index = 0
+for i in range(len(lst)):
+    if lst[i] == st:
+        index = i
+used[index] = 1 # 어디서부터 시작해서 탐색할건지
+dfs(index)
+print(count)
+
+--------------------------------------------------------------------------------------------------
+
+# 입력받은 출발점 알파벳부터 E까지 도착하는데 최소 비용 구하기
+st = input()
+used = [0]*5
+lst = ['A','B','C','D','E']
+minvalue = 21e8
+arr = [[0,4,0,0,0],
+       [0,0,1,2,9],
+       [5,0,0,7,0],
+       [0,0,0,0,1],
+       [0,0,0,0,0]]
+def dfs(now,sum):
+    global minvalue
+    if now == 4:
+        if minvalue > sum:
+            minvalue = sum
+        return
+    for i in range(5):
+        if arr[now][i] > 0:
+            if used[i] == 0:
+                used[i] = 1
+                dfs(i,sum+arr[now][i])
+                used[i] = 0
+index = 0
+for i in range(len(lst)):
+    if lst[i] == st:
+        index = i
+used[index] = 1
+dfs(index,0)
+print(minvalue)
