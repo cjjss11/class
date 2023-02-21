@@ -1,0 +1,127 @@
+반 강의
+
+Tree 순회
+arr = ' ABCDEFG' # 앞에 공백을 넣으므로써 A가 1번 인덱스 (0번 인덱스는 비워둠)
+1. 전위순회(preorder)
+def preorder(now):
+    if now > len(arr)-1:
+        return
+    print(arr[now],end=' ') # 전위순회 출력 위치
+    preorder(now*2) # 왼쪽 자식
+    preorder(now*2+1) # 오른쪽 자식
+
+2. 후위순회(postorder)
+def postorder(now):
+    if now > len(arr)-1:
+        return
+    postorder(now*2)
+    postorder(now*2+1)
+    print(arr[now],end=' ') # 후위순회 출력위치 (왼쪽 자식 오른쪽 자식 모두 탐색 후 출력)
+
+3. 중위순회(inorder)
+def inorder(now):
+    if now > len(arr)-1:
+        return
+    inorder(now*2)
+    print(arr[now],end=' ') # 중위순회 출력위치 (왼쪽 자식 탐색 후 출력)
+    inorder(now*2+1)
+
+preorder(1) # 루트 노드는 1번 인덱스
+print()
+postorder(1)
+print()
+inorder(1)
+
+------------------------------------------------------------------------
+
+BST(Binary Search Tree)
+검색을 빠르게 하는 대표적인 알고리즘으로 BST와 HASH가 있음
+BST는 로그N의 속도로 검색을 가능하게 하지만
+입력되는 데이터가 좋지 않을 시 최악의 경우 오더n의 속도가 날 수 있음
+이때 발란스드 트리로 만들어 주는 알고리즘을 적용하여 로그N의 속도로 탐색이 가능하게끔 하는 과정이 필요
+그 과정을 해주는 것이 redblack tree
+lst = [4,7,2,9,3,1,6]
+arr = [0]*10 # lst의 첫번째 값은 1번 인덱스 (0번 인덱스 비워둠)
+def insert(target):
+    now = 1
+    while 1:
+        if arr[now] == 0:  # 루트노드가 비어 있으면 값 저장
+            arr[now] = target
+            return
+        if arr[now] < target:
+            now = now * 2 + 1 # 오른쪽에 값 넣기
+        else:
+            now = now * 2 # 왼쪽에 값 넣기
+for i in range(len(lst)):
+    insert(lst[i])        # 트리 모양으로 lst값을 저장
+
+
+def search(target):
+    now = 1
+    while 1:
+        if now >= 10:  # arr을 10개로 만들었으므로 now가 배열을 벗어나면 존재하지 않다는 의미
+            return 0
+        if arr[now] == 0: # target이 없으면 0 리턴
+            return 0
+        if arr[now] == target:
+            return 1
+        if arr[now] < target:
+            now = now*2+1
+        else:
+            now = now*2
+n = int(input())
+ret = search(n) # 입력 받은 값이 존재하는지 탐색
+if ret == 1:
+    print('존재함')
+else:
+    print('없는 숫자')
+
+------------------------------------------------------------------------
+
+heap
+1. maxheap
+부모 노드가 자식 노드보다 커야함 (만약 부모가 작으면 SWAP)
+완벽한 이진트리 형태를 유지
+arr = [3,7,1,4,7,31,8]
+heap = [0]*30    # maxheap
+hindex = 1       # 1번 인덱스에 첫 값을 저장하기 위한
+def insert(value):
+    global hindex
+    heap[hindex] = value
+    now = hindex
+    hindex += 1
+
+    while 1:
+        parent = now // 2  # 부모 인덱스 구하기
+        if parent == 0:    # 만약에 부모인덱스가 0이라면 (now는 루트노드) 비교할 것 없음
+            break          # 부모와 now값 비교해서 부모가 크거나 같으면 break
+        if heap[parent] >= heap[now]:
+            break
+        heap[parent],heap[now] = heap[now],heap[parent] # 부모값이 now값 보다 작으면 swap
+        now = parent  # 부모가 그 다음의 now가 됨 (부모가 부모의 부모와 비교를 실행)
+
+def top():
+    return heap[1]
+
+def pop():
+    global hindex
+    heap[1] = heap[hindex-1] # 맨 뒤에 있는 값을 루트로 올리고 (맨 위로)
+    heap[hindex] = 0  # 맨 뒤에 값을 0으로 바꾸고
+    hindex -= 1  # hindex 값 감소
+    now = 1 # 루트부터 자식들이랑 비교하기 위해서 now를 1로 셋팅
+    while 1:
+        lson = now*2 # 왼쪽 자식
+        rson = now*2+1 # 오른쪽 자식
+        # 자식이 있고 오른쪽 자식이 왼쪽 자식보다 크면 (오른쪽 자식과 now랑 비교)
+        if lson <= hindex and heap[lson] < heap[rson]:
+            lson = rson
+        # 자식이 없거나 부모가 자식보다 더 크면 break
+        if lson > hindex or heap[now] > heap[lson]:
+            break
+        heap[now],heap[lson] = heap[lson], heap[now]
+        now = lson
+for i in range(len(arr)):
+    insert(arr[i])
+for i in range(len(arr)):
+    print(top(),end=' ')
+    pop()
