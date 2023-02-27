@@ -1,0 +1,84 @@
+반 강의
+
+같은 그룹이 몇개인지 출력
+import sys
+sys.stdin = open('input.txt','r')
+arr = [0]*200
+def findboss(member):
+    if arr[ord(member)] == 0:
+        return member
+    else:
+        result = findboss(arr[ord(member)])
+        return result
+def setunion(a,b):
+    fa = findboss(a)
+    fb = findboss(b)
+    if fa == fb:
+        return
+    else:
+        arr[ord(fb)] = fa
+N = int(input())
+count = 6 # A B C D E F 각각의 독립 상태
+for i in range(N):
+    st1,st2 = input().split()
+    if findboss(st1) != findboss(st2): # 보스가 같다는 말은 이미 같은 그룹이라는 의미이므로
+        setunion(st1, st2)             # 보스가 같지 않을 때 setunion 함수로 들어가서 확인함
+        count -= 1
+print(count)
+
+----------------------------------------------------------------------------------
+
+MST (Minimum Spanning Tree)
+cycle이 없는 graph
+최소 간선의 개수는 정점의 개수 - 1개
+최소 비용 구하기
+보스가 같으면 같은 그룹이라는 의미이므로 cycle 발생
+그러므로 보스가 같지 않을 때 다리를 연결해야 함
+
+import sys
+sys.stdin = open('input.txt','r')
+arr = [0]*200
+def findboss(member):
+    if arr[ord(member)] == 0:
+        return member
+    else:
+        result = findboss(arr[ord(member)])
+        return result
+def setunion(a,b):
+    fa = findboss(a)
+    fb = findboss(b)
+    if fa == fb:
+        return
+    else:
+        arr[ord(fb)] = fa
+
+1. 정렬하지 않고 그냥 최소 비용 구한 것
+num1 = int(input()) # 정점의 개수
+num2 = int(input()) # 간선의 개수
+sum = 0
+cnt = num1 - 1
+for i in range(num2):
+    st1,st2,cost = input().split()
+    cost = int(cost)
+    if findboss(st1) != findboss(st2):
+        setunion(st1,st2)
+        sum += cost
+        cnt -= 1
+if cnt == 0:
+    print(sum)
+
+2. 비용을 기준으로 정렬을 하고 최소 비용을 구한 것
+num1 = int(input()) # 정점의 개수
+num2 = int(input()) # 간선의 개수
+sum = 0
+cnt = num1 - 1
+lst = [list(input().split()) for _ in range(num2)]
+lst.sort(key=lambda x:int(x[2])) # 비용이 2번 인덱스이므로 비용 기준으로 정렬
+for i in range(num2):
+    lst[i][2] = int(lst[i][2])
+    if findboss(lst[i][0]) != findboss(lst[i][1]):
+        setunion(lst[i][0],lst[i][1])
+        sum += lst[i][2]
+        cnt -= 1
+if cnt == 0:
+    print(sum)
