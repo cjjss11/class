@@ -1,0 +1,107 @@
+반 강의
+n개의 항에서 숫자 1개씩 뽑아서 더했을때 합이 10 나오는 경우
+lst = [1,2,3,4]
+cnt = 0
+def dfs(level,sum):
+    global cnt
+    if level == n:
+        if sum == 10:
+            cnt += 1
+        return
+    for i in range(4):
+        dfs(level+1,sum+lst[i])
+dfs(0,0)
+
+----------------------------------------------------------------------------------------------------
+
+조합
+T K A B
+lst = ['T','K','A','B']
+path = [0]*4
+cnt = 0
+def dfs(level,start):
+    global cnt
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        cnt += 1
+        return
+    for i in range(start,4):
+        path[level] = lst[i]
+        dfs(level+1,i+1) # 조합은 i + 1
+dfs(0,0)
+print(cnt)
+
+중복조합
+lst = ['T','K','A','B']
+path = [0]*4
+cnt = 0
+def dfs(level,start):
+    global cnt
+    if level == 3:
+        for i in range(3):
+            print(path[i],end=' ')
+        print()
+        cnt += 1
+        return
+    for i in range(start,4):
+        path[level] = lst[i]
+        dfs(level+1,i) # 중복조합은 i
+dfs(0,0)
+print(cnt)
+
+----------------------------------------------------------------------------------------------------
+
+부분집합
+A B C D가 영화관을 가는데 누구랑 가는지의 경우의수
+ex) A B , A B C D, A C , D ... 수가 안 정해져 있음
+lst = ['A','B','C','D']
+cnt = 0
+n = int(input())
+def abc(level,idx=0,S=''):
+    global cnt
+    print(S)
+    cnt += 1
+
+    if level == n:
+        return
+    for i in range(4):
+        if i >= idx:
+            abc(level+1,i+1,S+lst[i])
+abc(0)
+print(cnt)
+
+----------------------------------------------------------------------------------------------------
+
+각 라인에서 하나씩 번갈아가면서 숫자를 뽑고 그 숫자에 1씩 증가한 값 곱한 후
+0에 가장 가까울 때의 합 출력
+line1에서 3 뽑고 *1 그 다음 line2에서 7 뽑고 *2 그 다음 lin1에서 -5 뽑고 *3 ...
+line1 = [-2,3,4,9,-5,2]
+line2 = [4,7,-3,-6,-1,2]
+used1 = [0]*6
+used2 = [0]*6
+minvalue = int(21e8)
+answer = 0
+def dfs(level,sum):
+    global minvalue,answer
+    if level == 12:
+        # 0에 가장 가까운 sum 구하기
+        if minvalue > abs(sum):
+            minvalue = abs(sum)
+            answer = sum
+        return
+    if level % 2 == 0:
+        for i in range(6):
+            if used1[i] == 0:
+                used1[i] = 1
+                dfs(level+1,sum+(line1[i]*(level+1)))
+                used1[i] = 0
+    elif level % 2 == 1:
+        for i in range(6):
+            if used2[i] == 0:
+                used2[i] = 1
+                dfs(level+1,sum+(line2[i]*(level+1)))
+                used2[i] = 0
+dfs(0,0)
+print(answer)
