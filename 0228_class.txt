@@ -1,0 +1,88 @@
+반 강의
+
+두 팀으로 나누었을 때 전투력의 차이가 최소인 값을 출력
+score = [49,6,54,80,3,18,71]
+minvalue = 21e8
+check = [0]*7
+def dfs(start,level,sum):
+    global minvalue
+    against = 0
+    for i in range(7):
+        if check[i] == 0:
+            against += score[i]
+    gap = abs(sum-against)
+    minvalue = min(minvalue,gap)
+
+    if level == 6:
+        return
+    for i in range(start,7):
+        check[i] = 1
+        dfs(i+1,level+1,sum+score[i])
+        check[i] = 0
+dfs(0,0,0)
+print(minvalue)
+
+---------------------------------------------------------------------------------------------------
+
+미로찾기 - 도착 가능한지 불가능한지 출력
+arr = [[0,0,0,0],[1,0,1,0],[1,0,1,0],[0,0,0,0]]
+used = [[0]*4 for _ in range(4)]
+flag = 0
+def dfs(y,x):
+    global flag
+    if y == 3 and x == 3:
+        flag = 1
+        return
+    direct_i = [0,1,0,-1]
+    dircect_j = [1,0,-1,0]
+    for i in range(4):
+        dy = y + direct_i[i]
+        dx = x + dircect_j[i]
+        if 0 <= dy < 4 and 0 <= dx < 4:
+            if arr[dy][dx] == 0:
+                if used[dy][dx] == 0:
+                    used[dy][dx] = 1
+                    dfs(dy,dx)
+used[0][0] = 1
+dfs(0,0)
+if flag:
+    print('도착 가능')
+else:
+    print('도착 불가능')
+
+---------------------------------------------------------------------------------------------------
+
+총 3번의 개발과정을 거친 후 9개 구역 합의 max값 출력
+개발구역 포함 그 주위 구역을 ( *7)%10 값으로 바꿈
+
+import copy
+arr = [[3,2,7],[4,5,1],[7,2,8]]
+maxvalue = -21e8
+def digging(y,x):
+    direct_i = [0,-1,0,1,0] # 0,0 자기 자신도 포함
+    direct_j = [0,0,1,0,-1]
+    for i in range(5):
+        dy = y + direct_i[i]
+        dx = x + direct_j[i]
+        if 0 <= dy < 3 and 0 <= dx < 3:
+            arr[dy][dx] = (arr[dy][dx] * 7) % 10
+def getsum():
+    sum = 0
+    for i in range(3):
+        for j in range(3):
+            sum += arr[i][j]
+    return sum
+def dfs(level):
+    global maxvalue,arr
+    backup = copy.deepcopy(arr) # 원상복구를 위해 미리 arr배열을 backup에 카피
+    if level == 3:
+        result = getsum()
+        maxvalue = max(maxvalue,result)
+        return
+    for i in range(3):
+        for j in range(3):
+            digging(i,j)
+            dfs(level+1)
+            arr = copy.deepcopy(backup)  # 다녀와서 원상복구
+dfs(0)
+print(maxvalue)
