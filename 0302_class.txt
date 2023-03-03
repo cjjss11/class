@@ -1,0 +1,124 @@
+반 강의
+
+A부터 D까지의 탐색 순서 BFS
+from collections import deque
+lst = ['A','B','C','D']
+arr = [[0,1,1,0],
+       [0,0,1,1],
+       [0,1,0,1],
+       [0,0,0,0]]
+used = [0]*4
+result = []
+def bfs(st):
+    q = deque()
+    q.append(st)
+    while q:
+        now = q.popleft()
+        result.append(lst[now])
+        for i in range(4):
+            if arr[now][i] == 1:
+                if used[i] == 0:
+                    used[i] = 1
+                    q.append(i)
+used[0] = 1
+bfs(0)
+print(*result)
+
+---------------------------------------------------------------------------------------------------
+
+몇일이 되면 화단에 꽃이 다 피는지 출력 (함수로 해도 되고 안 해도 됨)
+from collections import deque
+arr = [[0]*3 for _ in range(3)]
+y,x = map(int,input().split())
+answer = 0
+def bfs(y,x):
+    global answer
+    q = deque()
+    q.append([y,x])
+    direct_i = [-1, 0, 1, 0]
+    direct_j = [0, 1, 0, -1]
+    while q:
+        now = q.popleft()
+        y,x = now[0],now[1]
+        answer = arr[y][x] # 마지막에 꽃이 핀 자리
+        for i in range(4):
+            dy = y + direct_i[i]
+            dx = x + direct_j[i]
+            if 0 <= dy < 3 and 0 <= dx < 3:
+                if arr[dy][dx] == 0:
+                    arr[dy][dx] = arr[y][x]+1
+                    # answer = arr[dy][dx] # 마지막에 꽃이 핀 자리를 이렇게도 표현 가능
+                    q.append([dy,dx])
+arr[y][x] = 1
+bfs(y,x)
+print(answer)
+
+---------------------------------------------------------------------------------------------------
+
+꽃을 두개를 동시에 심었을 때 몇일이 되면 화단에 꽃이 모두 피는지 출력
+1.
+from collections import deque
+arr = [[0]*5 for _ in range(5)]
+y1,x1 = map(int,input().split())
+y2,x2 = map(int,input().split())
+answer = 0
+def bfs(y1,x1,y2,x2):
+    global answer
+    q = deque()
+    q.append([y1,x1])
+    q.append([y2,x2])
+    direct_i = [-1,0,1,0]
+    direct_j = [0,1,0,-1]
+    while q:
+        now1 = q.popleft()
+        y1,x1 = now1[0],now1[1]
+        now2 = q.popleft()
+        y2,x2 = now2[0],now2[1]
+        answer = arr[y1][x1]
+        for i in range(4):
+            dy1 = y1 + direct_i[i]
+            dx1 = x1 + direct_j[i]
+            dy2 = y2 + direct_i[i]
+            dx2 = x2 + direct_j[i]
+            if 0 <= dy1 < 5 and 0 <= dx1 < 5:
+                if arr[dy1][dx1] == 0:
+                    arr[dy1][dx1] = arr[y1][x1] + 1
+                    q.append([dy1,dx1])
+            if 0 <= dy2 < 5 and 0 <= dx2 < 5:
+                if arr[dy2][dx2] == 0:
+                    arr[dy2][dx2] = arr[y2][x2] + 1
+                    q.append([dy2,dx2])
+arr[y1][x1] = 1
+arr[y2][x2] = 1
+bfs(y1,x1,y2,x2)
+print(answer)
+
+2. 몇일이 되면 화단에 꽃이 만개하는지 level을 사용해서 출력
+from collections import deque
+arr = [[0]*5 for _ in range(5)]
+flower = list(map(int,input().split()))
+y1,x1 = flower[0],flower[1]
+y2,x2 = flower[2],flower[3]
+
+flower = [(y1,x1,1),(y2,x2,1)] # 튜플 형태로도 넣을 수 있음 , 1은 level
+answer = 0
+
+direct_i = [-1,1,0,0]
+direct_j = [0,0,-1,1]
+def bfs(flower):
+    global answer
+    q = deque(flower)
+    while q:
+        nowy,nowx,level = q.popleft()
+        arr[nowy][nowx] = level
+        answer =level
+
+        for i in range(4):
+            dy = nowy + direct_i[i]
+            dx = nowx + direct_j[i]
+            if 0 <= dy < 5 and 0 <= dx < 5:
+                if arr[dy][dx] == 0:
+                    arr[dy][dx] = arr[nowy][nowx] + 1
+                    q.append((dy,dx,level+1))
+bfs(flower)
+print(answer)
