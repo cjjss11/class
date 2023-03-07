@@ -1,0 +1,115 @@
+반 강의
+
+강아지가 (3,0)사료를 먹고 (3,4)여자친구를 만나러 가는데 최소 거리
+from collections import deque
+arr = [[0,0,0,0,1],
+       [1,0,1,0,1],
+       [1,0,1,0,0],
+       [0,0,0,0,0]]
+answer = 0
+def bfs(sty,stx,edy,edx): # 시작점과 도착점
+    q = deque()
+    q.append([sty,stx,0])
+    used = [[0] * 5 for _ in range(4)] # 함수를 두번 돌리기 때문에 used 배열을 함수 안에다가 선언
+    used[sty][stx] = 1
+    direct_i = [0,0,1,-1]
+    direct_j = [-1,1,0,0]
+    while q:
+        now = q.popleft()
+        now_y,now_x,count = now[0],now[1],now[2] # count는 이동거리
+        for i in range(4):
+            if now_y == edy and now_x == edx:
+                return count
+            dy = now_y + direct_i[i]
+            dx = now_x + direct_j[i]
+            if 0 <= dy < 4 and 0 <= dx < 5:
+                if arr[dy][dx] == 0:
+                    if used[dy][dx] == 0:
+                        used[dy][dx] = 1
+                        q.append([dy,dx,count+1])
+                        # used[dy][dx] = 0 # used 배열을 함수 안에 선언 했기 때문에 안 적어도 됨
+
+answer += bfs(0,0,3,0) # (0,0)에서 사료가 있는 좌표까지
+answer += bfs(3,0,3,4) # 사료가 있는 좌표에서 여자친구가 있는 좌표까지
+print(answer)
+
+---------------------------------------------------------------------------------------------------
+
+바다는 0 섬은 1 섬의 크기 구하기
+from collections import deque
+arr = [[0,0,1,0,0],
+       [0,0,1,0,0],
+       [0,1,1,1,0],
+       [0,0,1,0,0],
+       [0,0,0,0,0]]
+count = 0
+def bfs(y,x):
+    global count
+    q = deque()
+    q.append([y,x])
+    direct_i = [-1,0,1,0]
+    direct_j = [0,1,0,-1]
+    while q:
+        now = q.popleft()
+        now_y,now_x = now[0],now[1]
+        for i in range(4):
+            dy = now_y + direct_i[i]
+            dx = now_x + direct_j[i]
+            if 0 <= dy < 5 and 0 <= dx < 5:
+                if arr[dy][dx] == 1:
+                    q.append([dy,dx])
+                    arr[dy][dx] = 0 # 섬을 바다로 바꾸기 (중복 체크 용도)
+                    count += 1
+flag = 0
+y = 0
+x = 0
+for i in range(5):
+    for j in range(5):
+        if arr[i][j] == 1:
+            y = i
+            x = j
+            flag = 1
+            break
+    if flag:
+        break
+bfs(y, x)
+print(count)
+
+---------------------------------------------------------------------------------------------------
+
+섬 개수, 가장 큰 섬 크기, 가장 작은 섬 크기 구하기
+from collections import deque
+arr = [[0,0,1,0,1],
+       [0,0,1,0,1],
+       [0,1,1,1,0],
+       [0,0,1,0,0],
+       [1,0,0,1,1]]
+def bfs(y,x):
+    q = deque()
+    q.append([y,x])
+    size = 0
+    direct_i = [-1,0,1,0]
+    direct_j = [0,1,0,-1]
+    while q:
+        size += 1
+        now = q.popleft()
+        now_y,now_x = now[0],now[1]
+        for i in range(4):
+            dy = now_y + direct_i[i]
+            dx = now_x + direct_j[i]
+            if 0 <= dy < 5 and 0 <= dx < 5:
+                if arr[dy][dx] == 1:
+                    if used[dy][dx] == 0:
+                        used[dy][dx] = 1
+                        q.append([dy,dx])
+    return size
+count = 0
+used = [[0]*5 for _  in range(5)]
+for i in range(5):
+    for j in range(5):
+        if arr[i][j] == 1:
+            if used[i][j] == 0:
+                used[i][j] = 1
+                count += 1
+                print(f'{count}번 째 섬 크기는 {bfs(i,j)}')
+print(f'섬의 개수는 {count}')
