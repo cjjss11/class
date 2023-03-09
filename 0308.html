@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/0308.css">
+</head>
+<body>
+-------------------------------Live 강의-------------------------------
+    box 위치, box 안에 text 위치
+    class가 box, test로 두개
+    <div>
+        <div class="box1 test">
+            <span>1</span>
+        </div>
+        <div class="box1">
+            <span>2</span>   
+        </div>         
+    </div>
+
+    sticky 사용
+    <div>
+        <div class="box"></div>
+        <div class="box sticky"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>         
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+
+-------------------------absolute vs relative-------------------------
+    <div class="parent">
+        <div class="absolute">형</div>
+        <div class="sibling">동생</div>
+    </div>
+    <hr>
+    <div class="parent">
+        <div class="relative">형</div>
+        <div class="sibling">동생</div>
+    </div>
+
+    <!-- 공통 스타일링 -->
+    <style>
+        div {
+            box-sizing: border-box;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+        .parent {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+
+    <!-- 차이점 확인해보기 -->
+    <style>
+        .absolute {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            background-color: crimson;
+        }
+        .sibling {
+            background-color: deepskyblue;
+        }
+        .relative {
+            position: relative;
+            top: 100px;
+            left: 100px;
+            background-color: crimson;
+        }
+    </style>
+
+
+----------------------------Box Positioining----------------------------
+    <!-- div.big-box>div.small-box*5 -->
+    <div class="big-box">
+        <div class="small-box" id="red"></div>
+        <div class="small-box" id="gold"></div>
+        <div class="small-box" id="green"></div>
+        <div class="small-box" id="blue"></div>
+        <div class="small-box" id="pink"></div>
+    </div>
+
+--------------------------------------------------------------------------
+
+----------------------------------반 강의----------------------------------
+
+    <!-- em은 부모의 2배 (부모가 36px이므로 72px) -->
+    <ul class="font-big">
+        <li class="em">2em</li>
+        <li class="rem">2rem</li>
+        <li>no class</li>
+    </ul>
+    랄랄라
+
+
+    -------------------------------px,vw 사용-------------------------------
+    <h1 class="px">px사용</h1>
+    <h1 class="vw">vw사용</h1>
+    <p>오예에에에에에</p>
+
+
+    ---------------------------------결합자---------------------------------
+    <div>
+        <span>1.이건 빨강입니다.</span>
+        <p>2.이건 빨강이 아닙니다.</p>
+        <p>
+            <span>3.이건 빨강입니다.</span>
+        </p>
+        <span>4.이건 빨강입니다.</span>
+    </div>
+    <p>
+        <span>5.이건 빨강입니다.</span>
+    </p>
+
+
+    ------------------------인접 형제 결합, 형제 결합------------------------
+    <span>p태그의 앞에 있기 때문에 이건 빨강이 아닙니다.</span>
+    <p>여기 문단이 있습니다.</p>
+    <span>p태그와 인접한 형제이기 때문에 이건 빨강입니다!</span>
+    <b>그리고 코드도 있습니다.</b>
+    <span>p태그와 인접한 형제가 아니기 때문에 이건 빨강이 아닙니다.</span>
+
+
+    --------------------------block-line, in-line--------------------------
+    <div id="ssafy">div태그는 블록라인 요소</div>
+    <span>in-line 요소는 옆으로</span>
+    <span>나란히 글자 크기 길이 만큼</span>
+    <div>block-line은 혼자서 네모칸 하나를 다 차지함</div>
+    <div class="jeju">
+        <span id="room212">여름에 벤자리회 먹고싶다</span>
+    </div>
+
+---------------------------------------------------------------------------
+
+--------------------------Card Styling 첫번째 방법--------------------------
+    <div class="card">
+        <div class="card-nav">
+            <span>오늘의 명소</span>
+        </div>
+
+        <div class="card-img">
+            <img src="jeju.png" alt="main img" width="664" height="330">
+        </div>
+
+        <div class="card-img-description">
+            <div>
+                <span>제주도</span>
+            </div>
+            <div>
+                <span>성산 일출봉</span>
+            </div>
+        </div>
+
+        <div class="card-body-title">
+            <h4>제주도 서귀포시 성산읍</h4>
+            <p>2020.03.23</p>
+        </div>
+
+        <div class="card-body">
+            <hr>
+        </div>
+
+        <div class="card-body-content">
+            <p>성산일출봉은 제주도의 다른 오름들과는 달리 마그마가 물속에서 분출하면서 만들어진 수성화산체다 
+                화산활동시 분출된 뜨거운 마그마가 차가운 바닷물과 만나면서 화산재가 습기를 많이 머금어 
+                끈끈한 성질을 띄게 되있고, 이것이 층을 이루면서 쌓인 것이 성산일출봉이다.</p>
+        </div>
+
+        <div class="card-footer">SSAFY</div>
+
+</div>
+
+--------------------------Card Styling 두번째 방법--------------------------
+
+<div class="container">
+    <div class="card">
+        <div class="card-nav">
+            <h2>오늘의 명소</h2>
+        </div>
+        <div class="card-header">
+            <img src="jeju.PNG" alt="card image" class="card-img">
+            <div class="card-img-description">
+                <h4>제주도</h4>
+                <h4>성산 일출봉</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card-body-title">
+                <h4>제주도 서귀포시 성산읍</h4>
+                <p>2020.03.23</p>
+            </div>
+            <hr />
+            <div class="card-body-content">
+                <p>
+                    성산일출봉은 제주도의 다른 오름들과는 달리 마그마가 물속에서 분출하면서 만들어진 수성화산체다.
+                    화산활동시 분출된 뜨거운 마그마가 차가운 바닷물과 만나면서 화산재가 습기를 많이 머금어 끈끈한 성질을 띄게 되었고,
+                    이것이 층을 이루면서 쌓인 것이 성산일출봉이다.
+                </p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div>SSAFY</div>
+        </div>
+    </div>
+</div>
+
+-------------------------------데일리 실습 2-1-------------------------------
+  
+<div class="clearfix">
+<div class="title">SSAFY</div>
+<div class="detail">싸피 소개합니다!</div>
+</div>
+<div></div>
+<img src="./ssafy_logo.png" alt="ssafy_logo" class="left">
+<span >
+    삼성 청년 SW 아카데미(SSAFY)는 삼성의 SW 교육 경험과
+    고용노동부의 취업지원 노하우를 바탕으로 취업 준비생에게 
+    SW 역량 향상 교육 및 다양한 취업지원 서비스를 제공하여 
+    취업에 성공하도록 돕는 프로그램입니다.
+</span>
+  <style>
+  .clearfix {
+    position: relative;
+  }
+  .title {
+    border: 2px solid blue;
+    display: inline;
+  }
+
+  .detail {
+    position: absolute;
+    border: 2px dashed skyblue ;
+    right: 0;
+    display: inline;
+  }  
+  .left {
+    float: left;
+  }
+
+</style>
+
+-------------------------------데일리 과제 2-4-------------------------------
+
+<div>
+    <p>자식</p>
+    <span>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;손자</p>
+    </span>
+    <p>자식</p>
+</div>
+
+<style>
+    div p {
+    color: blue;
+}
+    div > p {
+    color: crimson;
+}
+</style>
+
+-------------------------------데일리 과제 2-2-------------------------------
+
+<style>
+    header {
+        color: red;
+    }
+    section {
+        color: red;
+    }
+    h1 {
+        color: red;
+    }
+    footer {
+        color: red;
+    }
+    a {
+        color: red;
+    }
+    form {
+        color: red;
+    }
+</style>
+</head>
+<body>
+<header>header</header>
+<section>section</section>
+<div>div</div>
+<h1>h1</h1>
+<footer>footer</footer>
+<a href="#">a</a>
+<form>form</form>
+<span>span</span>
+
+-------------------------------데일리 실습 2-2-------------------------------
+
+<body>
+    <span>0</span> 
+    <p>1</p>
+    <p>2</p>
+    <span>3</span>
+    <p>4</p>
+    <div class="box">
+      <p>5</p>
+    </div>
+    <article>기사</article>
+    <ul>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+    </ul>
+    <span>9</span>
+    
+    <style>
+        p~span {
+            color: green;
+        }
+        p+p {
+            color: red;
+        }
+    </style>
+
+</body>
+</html>
