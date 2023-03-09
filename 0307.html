@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <p> p 태그는 단락 만들기</p>
+    단락 만들면 한줄 띄어진다. 
+    <p>
+        단락 안에서 줄 바꾸기 할 때는 <br>태그를 사용
+    </p>
+    <blockquote>인용문 넣기</blockquote>
+    입력하는                  그대로
+    화면에                    표기하려면
+    <pre> 피알이 태그를           사용하면      된다.</pre>
+    <strong>굵게</strong>
+    <em>이탤릭</em>
+    <q> 인용 내용을 적을 때 q tag 사용</q>
+    <mark>형광펜</mark>
+
+    <hr>
+    <!-- 리스트 -->
+    <!-- 순서가 없는 리스트 -->
+    <ul>
+        <li>파이썬</li>
+        <li>자바</li>
+        <li>C</li>
+    </ul>
+    <!-- 순서가 없는 리스트 -->
+    <ol>
+        <li>Python</li>
+        <li>Java</li>
+        <li>C</li>
+    </ol>
+    <!-- 3부터 시작하고 싶으면 -->
+    <!-- i는 로마 숫자 -->
+    <ol start="3" type="i">
+        <li>Python</li>
+        <li>Java</li>
+        <li>C</li>
+    </ol>
+
+    <!-- 엥커 tag -->
+    <a href="https://www.naver.com">
+        한번 눌러와 놀라운 세상이 펼쳐질까?
+    </a>
+    <!-- input tag -->
+    <p> 아이디: <input type="text">
+    </p>
+    <!-- autofocus를 사용하면 자동으로 커서가 생김 -->
+    <p> 아이디: <input type="text" autofocus></p>
+    비밀번호: <input type="password">
+
+    <!-- hr은 구분선 -->
+    <hr>
+
+    <!-- 제출을 누르면 서버 페이지로 전송됨 -->
+    <form action="서버 페이지의 url넣기">
+        <p>email을 적어 주세요.</p>
+        <input type="email">
+        <input type="submit">
+    </form>
+    <!-- 버튼 만들기 -->
+    <input type="button" value="절대로 이 버튼을 누르지 마시오">
+    <!-- 숫자 증가 감소 -->
+    <input type="number">
+    <!-- 체크박스 -->
+    <input type="checkbox">
+    <!-- 선택 -->
+    <input type="radio">
+    <!-- 제출 -->
+    <input type="submit">
+    <!-- 파일 선택 -->
+    <input type="file">
+    <!-- 날짜 -->
+    <input type="date">
+
+    <label for="asdf">여기 클릭 해보세요</label>
+    <input id="asdf" type="checkbox">
+
+    <select>
+        <option>Python</option>
+        <option>Java</option>
+        <option>C</option>
+    </select>
+
+    <!-- 한글을 넣었을 때 오류가 생길 수 있어서 value에다가 넣어 한글을 넣어도 value값으로 인식 -->
+    <select>
+        <option value="python">파이썬</option>
+        <option value="java">자바</option>
+        <option value="c">씨</option>
+    </select>
+
+    <!-- 퀴즈 -->
+    <h1>먹고 싶은 것을 선택하시오(중복체크 가능)</h1>
+
+    치킨<input type="checkbox">
+    피자<input type="checkbox">
+    떡갈비<input type="checkbox">
+    오리탕<input type="checkbox">
+    김떡순<input type="checkbox">
+
+    <hr>
+
+    <h2>해당되는 트랙을 체크하시오</h2>
+
+    <p>
+        파이썬<input type="radio">
+        자바<input type="radio">
+        임베디드<input type="radio">
+    </p>
+
+    <p>
+        해당반을 선택하세요.
+    
+    <select>
+        <option> 광주1반</option>
+        <option> 광주2반</option>
+        <option> 광주3반</option>
+    </select>
+    </p>
+    
+    <!-- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+    <body>
+        <div class="ssafy">파이썬</div>
+        <div>자바</div>
+        <div class="ssafy">씨쁠쁠</div>
+    
+        <a href="#" id="asdf">google</a>
+    
+        <a href="#">네이버</a>
+        <p>
+            자바스크립트
+        </p>
+    </body>
+    
+
+</body>
+</html>
