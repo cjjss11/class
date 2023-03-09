@@ -1,0 +1,324 @@
+.box1 {
+    background-color: plum;
+    width: 100px;
+    height: 100px;
+
+    margin-top: 10px;
+
+    margin-right: auto;
+    margin-left: auto;
+
+    margin: 10px auto;
+
+    text-align: center;
+
+}
+
+
+------------텍스트를 박스 정 가운데에 놓는 법 크기는 박스 크기------------
+span {
+    line-height: 100px; 
+}
+
+/* none은 아예 없애주는 것 */
+.test {
+    display: none;
+}
+
+/* visibility는 숨겨지는 것, 공간을 차지하는데 안 보이는 것 */
+.test {
+    visibility: hidden;
+}
+
+/* scroll을 해도 위치가 변하지 않음 (움직이지 않음) */
+.sticky {
+    position: sticky;
+    top: 20px;
+    background-color: orange;
+}
+
+
+---------------------------Box Positioning---------------------------
+.box2 {
+    width: 100px;
+    height: 100px;
+}
+.big-box {
+    position: relative;
+    margin: 100px auto 500px;
+    border: 5px solid black;
+
+    width: 500px;
+    height: 500px;
+}
+.small-box {
+    width: 100px;
+    height: 100px;
+}
+#red {
+    background-color: red;
+    position: absolute;
+    top: 400px;
+    left: 400px;
+}
+#gold {
+    background-color: gold;
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+}
+#green {
+    background-color: green;
+    position: absolute;
+    top: 200px;
+    left: 200px;
+}
+#blue {
+    background-color: blue;
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+#pink {
+    background-color: pink;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+--------------------------------em,rem--------------------------------
+.font-big {
+    font-size: 36px;
+}
+.em {
+    font-size: 2em;
+}
+.rem {
+    font-size: 2rem;
+}
+
+
+------------------------------px,vw 사용------------------------------
+h1 {
+    color: black;
+    background-color: pink;
+}
+.px {
+    width: 300px;
+}
+.vw {
+    width: 50vw;
+}
+
+
+---------------------------색깔 다양한 표현법---------------------------
+p {
+    color: red;
+}
+p {
+    color: rgb(255,0,0);
+}
+p {
+    color: #ff0000;
+}
+p {
+    color: hsla(0,100%,50,50%);
+}
+
+/* 마지막 50%은 명암
+hsla은 색조 채도 밝기로 색상 조절
+색조 0은 빨강 120은 녹색 240은 파랑에 가까움
+채도 0은 회색(흐림) 100은 풀 컬러
+밝기 0은 어두움 100은 밝음 */
+
+
+-------------------------------자식,자손-------------------------------
+div span {
+    color: red;
+}
+자식 결합
+div>span {
+    color: red;
+}
+
+
+-----------------------------인접 형제 결합-----------------------------
+p + span {
+    color: red;
+}
+
+
+-------------------------------형제 결합-------------------------------
+p~span {
+    color: red;
+}
+
+    
+--------------------------block-line, in-line--------------------------
+div {
+    width: 300px;
+    height: 50px;
+    margin: 10px;
+    background-color: beige;
+    border: 3px solid green;
+}
+span {
+    background-color: coral;
+    border: 3px dashed red;
+}
+/* auto를 사용하려면 width랑 height 크기를 지정하고 사용해야 함 */
+#ssafy {
+    margin: 10px auto;
+}
+.jeju {
+    text-align: center;
+}
+
+
+------------------------Card Styling 첫번째 방법------------------------
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+h4 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+}
+p {
+    font-family: Arial;
+}
+.card {
+    margin: auto;
+    width: 700px;
+    height: 700px;
+    border: 2px dashed black;
+}
+.card-nav {
+    text-align: center;
+    background-color: rgb(95, 173, 87);
+}
+
+.card-img {
+    display: block;
+    width: 100%;
+    height: 330px;
+    padding: 18px;
+}
+.card-img-description {
+    height: 70px;
+    text-align: center;
+    line-height: 30px;
+    background-color: rgb(95, 173, 87);
+    color: white;
+    width: 664px;
+    margin-top: 18px;
+    margin-left: 18px;
+    margin-right: 18px;
+}
+.card-body {
+    width: 664px;
+    margin-left: 18px;
+    margin-right: 18px;
+}
+.card-body-title {
+    position: relative;
+    padding: 18px;
+    margin-top: 36px;
+}
+.card-body-title > h4 {
+    display: inline;
+
+}
+.card-body-title > p {
+    position: absolute;
+    right: 18px;
+    top: 40px;
+    display: inline;
+}
+.card-body-content {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: linen;
+    width: 664px;
+    margin-left: 18px;
+    margin-right: 18px;
+    margin-bottom: 18px;
+}
+.card-footer {
+    text-align: end;
+    padding: 1.5px;
+    background-color: rgb(27, 105, 19);
+    color: white
+}
+
+------------------------Card Styling 두번째 방법------------------------
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 1200px;
+    margin: 200px auto;
+}
+h4 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+}
+p {
+    font-family: Arial;
+}
+.card {
+    margin: auto;
+    width: 700px;
+    border: 2px dashed black;
+}
+.card-nav {
+    text-align: center;
+    background-color: rgb(95, 173, 87);
+}
+.card-header {
+    padding: 18px;
+}
+.card-img {
+    object-fit: cover;
+    width: 100%;
+    height: 330px;
+}
+.card-img-description {
+    height: 70px;
+    text-align: center;
+    line-height: 35px;
+    background-color: rgb(95, 173, 87);
+    color: white;
+}
+.card-body {
+    padding: 18px;
+}
+.card-body-title {
+    position: relative;
+}
+.card-body-title > h4 {
+    display: inline;
+
+}
+.card-body-title > p {
+    position: absolute;
+    right: 0;
+    display: inline;
+}
+.card-body-content {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: linen;
+}
+.card-footer {
+    text-align: end;
+    padding: 1.5px;
+    background-color: rgb(27, 105, 19);
+    color: white
+}
+
