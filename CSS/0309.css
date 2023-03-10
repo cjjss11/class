@@ -1,0 +1,289 @@
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: orangered;
+
+    float: left;
+    margin-right: 20px;
+}
+
+---------------------------------------------------------------------
+
+.box1 {
+    width: 100px;
+    height: 100px;
+    background-color: orangered;
+    border: 1px solid black;
+}
+.box2 {
+    background-color: aquamarine;
+    width: 200px;
+}
+.left {
+    float: left;
+}
+
+---------------------------------------------------------------------
+
+.header {
+    height: 100px;
+    background-color: aquamarine;
+}
+.section-left {
+    height: 500px;
+    background-color: plum;
+    width: 30%;
+}
+.section-right {
+    height: 500px;
+    background-color: skyblue;
+    width: 70%;
+}
+.footer {
+    height: 100px;
+    background-color: yellowgreen;
+    clear: both;
+}
+.left {
+    float: left;
+}
+
+---------------------------------------------------------------------
+
+.container {
+    display: flex;
+
+    /* flex-direction은 row가 기본값 */
+    flex-direction: row;
+    flex-direction: column;
+
+    /* flex-wrap은 nowrap이 기본값 */
+    flex-wrap: nowrap;
+    flex-wrap: right;
+
+    /* justify는 메인축 기준 align은 교차축 기준 */
+
+    justify-content: flex-end;
+
+    /* space-between은 각각의 item 사이의 공간이 일정 */
+    justify-content: space-between;
+
+    /* space-around는item을 둘러싼 영역이 일정 */
+    justify-content: space-around;
+
+    /* space-evenly는 item들 사이 뿐만 아니라 모든 여백 일정 */
+    justify-content: space-evenly;
+
+}
+.item {
+    width: 100px;
+    height: 100px;
+    background-color: yellowgreen;
+    
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 50px;
+}
+
+---------------------------------------------------------------------
+
+.container {
+    background-color: cadetblue;
+    height: 300px;
+    display: flex;
+
+    /* align-items은 stretch가 기본값 */
+    align-items: stretch;
+    align-items: start;
+    align-items: end;
+    align-items: center;
+
+    /* baseline 선이 존재해서 그 선을 기준으로 정렬됨 */
+    align-items: baseline;
+    
+    /* 정가운데 정렬 */
+    justify-content: center;
+    align-items: center;
+}
+.item {
+    background-color: tan;
+    border: 1px solid black;
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+---------------------------------------------------------------------
+
+.flex-container {
+    background-color: salmon;
+    height: 100px;
+    display: flex;
+    
+}
+.flex-items {
+    background-color: mistyrose;
+    border: 1px solid black;
+    flex-basis: 150px;
+    flex-shrink: 1;
+}
+
+---------------------------------------------------------------------
+
+h1 {
+    margin-bottom: 0;
+    font-size: 16px;
+}
+.flex-item {
+    margin: 10px;
+    padding: 15px;
+    width: 50px;
+    text-align: center;
+    background-color: white;
+    border: 3px solid black;
+}
+
+.basic-container {
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: plum;
+}
+
+.flex-container {
+    display: flex;
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: plum;
+}
+
+.flex-container-column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: plum;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.center {
+    justify-content: center;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}
+
+.first {
+    height: 100px;
+}
+
+.second {
+    height: 50px;
+}
+
+.third {
+    height: 20px;
+}
+
+.stretch {
+    align-items: stretch;
+    height: 130px;
+}
+
+.nowrap {
+    flex-wrap: nowrap;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
+
+.grow {
+    flex-grow: 0;
+}
+
+.grow1 {
+    flex-grow: 1;
+}
+
+.grow2 {
+    flex-grow: 2;
+}
+
+.grow3 {
+    flex-grow: 3;
+}
+
+.shrink {
+    flex-shrink: 0;
+}
+
+.shrink1 {
+    flex-shrink: 1;
+}
+
+.shrink2 {
+    flex-shrink: 2;
+}
+
+.shrink3 {
+    flex-shrink: 3;
+}
+
+.flex-basis {
+    flex-basis: 100px
+}
+
+.flex {
+    flex: initial;
+    flex: auto;
+    flex: none;
+    flex: 1,1,100px;
+}
+
+.order0 {
+    order: 0;
+}
+
+.order1 {
+    order: 1;
+}
+
+.order2 {
+    order: 2;
+}
+
+.order3 {
+    order: 3;
+}
+
+.flex-container2 {
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: plum;
+}
+
+.margin-right {
+    margin-right: auto;
+}
